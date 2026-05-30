@@ -21,8 +21,8 @@ def collect_mu_logvar(model: torch.nn.Module, dataloader, device: torch.device |
         for inputs, _ in dataloader:
             inputs = inputs.to(device)
             mu, logvar = model.encode(inputs)
-            mu_values.append(mu.cpu().numpy())
-            logvar_values.append(logvar.cpu().numpy())
+            mu_values.append(np.asarray(mu.detach().cpu().tolist(), dtype=np.float32))
+            logvar_values.append(np.asarray(logvar.detach().cpu().tolist(), dtype=np.float32))
 
     if mu_values:
         mu_array = np.concatenate(mu_values, axis=0)

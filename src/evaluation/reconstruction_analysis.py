@@ -28,7 +28,7 @@ def compute_error_heatmap(original: torch.Tensor, reconstructed: torch.Tensor) -
 def save_image(tensor: torch.Tensor, output_path: str | Path, title: str | None = None, cmap: str = "gray"):
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    array = tensor.detach().cpu().numpy().squeeze()
+    array = np.asarray(tensor.detach().cpu().tolist()).squeeze()
 
     fig, axis = plt.subplots(figsize=(3, 3))
     axis.imshow(array, cmap=cmap)
@@ -42,7 +42,7 @@ def save_image(tensor: torch.Tensor, output_path: str | Path, title: str | None 
 def save_heatmap(tensor: torch.Tensor, output_path: str | Path, title: str | None = None):
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    array = tensor.detach().cpu().numpy().squeeze()
+    array = np.asarray(tensor.detach().cpu().tolist()).squeeze()
 
     fig, axis = plt.subplots(figsize=(3, 3))
     image = axis.imshow(array, cmap="magma")

@@ -28,5 +28,5 @@ def decode_latent_vector(latent_vector: np.ndarray, model_path: str | Path | Non
     with torch.no_grad():
         tensor = torch.tensor(latent_vector, dtype=torch.float32).unsqueeze(0)
         # squeeze all singleton dimensions so the returned array is 2D (H, W)
-        reconstruction = model.decode(tensor).squeeze().cpu().numpy()
+        reconstruction = np.asarray(model.decode(tensor).squeeze().detach().cpu().tolist(), dtype=np.float32)
     return reconstruction

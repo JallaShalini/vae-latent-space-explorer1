@@ -23,8 +23,8 @@ def collect_latent_vectors(model: torch.nn.Module, dataloader, device: torch.dev
         for inputs, targets in dataloader:
             inputs = inputs.to(device)
             mu, _ = model.encode(inputs)
-            latent_vectors.append(mu.cpu().numpy())
-            labels.append(targets.cpu().numpy())
+            latent_vectors.append(np.asarray(mu.detach().cpu().tolist(), dtype=np.float32))
+            labels.append(np.asarray(targets.detach().cpu().tolist(), dtype=np.int64))
 
     if latent_vectors:
         latent_vectors_array = np.concatenate(latent_vectors, axis=0)

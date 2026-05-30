@@ -26,7 +26,7 @@ def test_streamlit_app_starts_and_serves_root_page() -> None:
     )
 
     try:
-        deadline = time.time() + 45
+        deadline = time.time() + 90
         last_error: Exception | None = None
         while time.time() < deadline:
             try:

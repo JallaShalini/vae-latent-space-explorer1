@@ -3,6 +3,11 @@ name: Build and Publish Docker Image
 on:
   push:
     branches: [ main, master ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
 
 jobs:
   build-and-publish:

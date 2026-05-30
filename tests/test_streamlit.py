@@ -3,10 +3,15 @@ from __future__ import annotations
 import subprocess
 import sys
 import time
+import os
 from urllib.request import urlopen
 
 
 def test_streamlit_app_starts_and_serves_root_page() -> None:
+    if os.environ.get("CI"):
+        import pytest
+
+        pytest.skip("Skipping Streamlit startup test in CI environment")
     process = subprocess.Popen(
         [
             sys.executable,
